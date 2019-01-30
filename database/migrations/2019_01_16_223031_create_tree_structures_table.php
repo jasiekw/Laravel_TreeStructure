@@ -17,6 +17,7 @@ class CreateTreeStructuresTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('parent')->default(1)->nullable()->unsigned();
+            // $table->integer('parent')->unsigned();
             $table->timestamps();
 
 

@@ -18,8 +18,11 @@ if(!function_exists('drawTree')) {
 }
 
 if(!function_exists('drawTreeSelect')) {
-    function drawTreeSelect($name, $tree, $selectedId = null) {
+    function drawTreeSelect($name, $tree, $selectedId = null, $showMain = false) {
     echo '<select name="' . $name . '" class="form-control">';
+    if($showMain) {
+        echo '<option value="null">--glowna--</option>';
+    }
     foreach($tree as $node) {
         $level = ($node->getLevel() - 1) * 4;
         $push = '';
@@ -48,6 +51,7 @@ if(!function_exists('tree_json')) {
             {
                $output[$value["id"]] = &$value;
             }
+
          foreach($dane as $key => &$value)
             {
                if($value["parent_id"] && isset($output[$value["parent_id"]]))
@@ -56,6 +60,7 @@ if(!function_exists('tree_json')) {
                   }
    
             }
+
          foreach($dane as $key => &$value)
             {
                if($value["parent_id"] && isset($output[$value["parent_id"]]))
@@ -63,9 +68,15 @@ if(!function_exists('tree_json')) {
                        unset($dane[$key]);
                   }
             }
-        //  echo "<pre>";
-            echo json_encode($dane);
-         // print_r($dane);
-        //  echo "</pre>";
+        
+
+        $finalData = [];
+        foreach($dane as $item) {
+            $finalData[] = $item;
+        }
+        
+
+         echo json_encode($finalData);
+
     }
 }

@@ -24,7 +24,7 @@
 		{{csrf_field()}}
 	   <div class="form-group">
 		<label>Zaznacz rodzica</label>
-		{{drawTreeSelect('parent', $nodes)}}
+		{{drawTreeSelect('parent', $nodes, null, true)}}
 	   </div>
 	   <div class="form-group">
 		<label>Podaj nazwę</label>
@@ -98,12 +98,12 @@
 	 <div class="col-md-6">
 	  <h4 align="center"><u>Struktura drzewa</u></h4>
 	  <br />
-
 	  <div class="panel-body">
 		<div class="row justify-content-center">
 			<div class="row">
 				<div class="col-md-12">
 					<div id="treeview">
+					
 						<script> $('#treeview').treeview({data:{{tree_json($nodes)}} }); </script>
 					</div>
 					</br>

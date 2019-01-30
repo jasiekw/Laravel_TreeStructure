@@ -60,7 +60,11 @@ class TreeStructureController extends Controller
 
         // $request = $request->validate(['name' => 'required|max:30',]);
 
-            TreeStructure::create($request->all());
+        $postRequest = $request->all();
+        $postRequest['parent'] = ($postRequest['parent'] == 'null') ? null : $postRequest['parent'];
+
+
+            TreeStructure::create($postRequest);
     
             return redirect(route('TreeStructure.index'));
     }
