@@ -19,8 +19,10 @@ class TreeStructureController extends Controller
     {
         $Tree_structures = TreeStructure::all();
 
-        foreach($Tree_structures->toArray() as $item) {
-            if($item['parent'] == null) {
+		foreach($Tree_structures->toArray() as $item) 
+		{
+			if($item['parent'] == null) 
+			{
                 $item['parent'] = 0;
             }
             $treeAll[] = $item;
@@ -28,9 +30,6 @@ class TreeStructureController extends Controller
 
         $tree = new \BlueM\Tree($treeAll);
         $nodes = $tree->getNodes();
-
-    
-        
 
         return view('treestructure.index', [
             'nodes' => $nodes,
@@ -57,16 +56,12 @@ class TreeStructureController extends Controller
      */
     public function store(ValidatedRequest $request)
     {    
-
-        // $request = $request->validate(['name' => 'required|max:30',]);
-
         $postRequest = $request->all();
         $postRequest['parent'] = ($postRequest['parent'] == 'null') ? null : $postRequest['parent'];
 
-
-            TreeStructure::create($postRequest);
+		TreeStructure::create($postRequest);
     
-            return redirect(route('TreeStructure.index'));
+        return redirect(route('TreeStructure.index'));
     }
 
     /**
@@ -106,8 +101,6 @@ class TreeStructureController extends Controller
     public function Myupdate(ValidatedRequest $request)
     {
         
-        // $request = $request->validate(['name' => 'required|max:30',]);
-
         $old_name=$request->input('old_name');
         $update=TreeStructure::find($old_name);
         $update->update($request->all());

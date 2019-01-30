@@ -60,9 +60,6 @@
 	   <div class="form-group">
 		<label>Zaznacz element</label>
 		{{drawTreeSelect('old_name', $nodes)}}
-		{{-- <select name="category3" id="category3" class="form-control">
-		
-		</select> --}}
 	   </div>
 	   <div class="form-group">
 		<label>Podaj nową nazwę</label>
@@ -102,8 +99,7 @@
 		<div class="row justify-content-center">
 			<div class="row">
 				<div class="col-md-12">
-					<div id="treeview">
-					
+					<div id="treeview">	
 						<script> $('#treeview').treeview({data:{{tree_json($nodes)}} }); </script>
 					</div>
 					</br>
