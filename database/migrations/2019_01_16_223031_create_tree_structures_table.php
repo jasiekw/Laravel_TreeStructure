@@ -16,8 +16,14 @@ class CreateTreeStructuresTable extends Migration
         Schema::create('tree_structures', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('parent')->unsigned();
+            $table->integer('parent')->default(1)->nullable()->unsigned();
             $table->timestamps();
+
+
+            $table->foreign('parent')
+                ->references('id')
+                ->on('tree_structures')
+                ->onDelete('SET NULL');
         });
     }
 

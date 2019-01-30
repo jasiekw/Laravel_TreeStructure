@@ -18,7 +18,15 @@ class TreeStructureController extends Controller
     public function index()
     {
         $Tree_structures = TreeStructure::all();
-        $tree = new \BlueM\Tree($Tree_structures->toArray());
+
+        foreach($Tree_structures->toArray() as $item) {
+            if($item['parent'] == null) {
+                $item['parent'] = 0;
+            }
+            $treeAll[] = $item;
+        }
+
+        $tree = new \BlueM\Tree($treeAll);
         $nodes = $tree->getNodes();
 
     
