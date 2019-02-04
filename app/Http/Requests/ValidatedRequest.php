@@ -24,7 +24,8 @@ class ValidatedRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:20',
+            'name' => 'required|max:20|regex:/(^([a-zA-z0-9 _]+)(\d+)?$)/u',
+
         ];
     }
 
@@ -33,6 +34,7 @@ class ValidatedRequest extends FormRequest
         return [
         'name.required' => 'Podaj nazwę',
         'name.max' => 'Element może zawierać maksymalnie 20 znaków',
+        'name.regex' => 'Nazwa może składać się jedynie z liter, cyfr i spacji',
         ];
     }
 }
