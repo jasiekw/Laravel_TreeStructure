@@ -112,14 +112,29 @@ class TreeStructureController extends Controller
         $old_parent=$request->input('old_parent');
         $parent=$request->input('parent');
         
-        if ($old_parent !== $parent) 
-        {
-            $update=TreeStructure::find($old_parent);
-            $update->update($request->all());
+        $Tree_structures = TreeStructure::all();
+
+		foreach($Tree_structures->toArray() as $item) 
+		{
+			if($item['parent'] == null) 
+			{
+                $item['parent'] = 0;
+            }
+            $treeAll[] = $item;
         }
 
-        return redirect(route('TreeStructure.index'));
+        $tree = new \BlueM\Tree($treeAll);
 
+        foreach ((Siblings($tree, $old_parent)) as $include)
+        {
+            if ($include == $parent) 
+            return redirect(route('TreeStructure.index'));
+        }
+
+        $update=TreeStructure::find($old_parent);
+        $update->update($request->all());
+
+        return redirect(route('TreeStructure.index'));
     }
 
     /**

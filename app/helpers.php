@@ -92,3 +92,15 @@ if(!function_exists('tree_json'))
 
     }
 }
+
+if(!function_exists('Siblings')) 
+{
+    function Siblings($data, $id)
+    {
+
+        $node = $data->getNodeById($id);
+        $sib= $node->getDescendants();
+        array_push($sib, $id);
+        return $sib;
+    }
+}
